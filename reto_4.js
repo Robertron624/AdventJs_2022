@@ -1,34 +1,11 @@
 function fitsInOneBox(boxes) {
 
-    let canFit = false;
-
-    let biggestBox = {
-        l: 0,
-        w: 0,
-        h: 0
-    }
-
-    boxes.map((box) => {
-        
-        if(box.l > biggestBox.l || box.w > biggestBox.w || box.h > biggestBox.h){
-            biggestBox = box
-        }
+    return boxes.sort((a, b) => a.l - b.l).every((box, index) => {
+        if (index === boxes.length - 1) return true;
+        const cajaSig = boxes[index+1];
+        const nextBox = box.l < cajaSig.l && box.w < cajaSig.w && box.h < cajaSig.h
+        return nextBox;
     })
-
-    console.log('biggestBox: ', biggestBox)
-
-    boxes.forEach((box) => {
-        if(box != biggestBox){
-            if(biggestBox.l > box.l && biggestBox.w > box.w && biggestBox.h > box.h){
-                canFit = true
-            }
-            else{
-                canFit = false
-            }
-        }
-    })
-
-    return canFit
 }
 
 
