@@ -1,5 +1,4 @@
 function createCube(size) {
-    // console.log(size)
 
     let firstHalf = ""
     let secondHalf = ""
@@ -16,25 +15,17 @@ function createCube(size) {
         firstHalf += substringUpper
 
         let substringLower = '\\/'.repeat(lowerIterator) + lowerSpace + '\n'
-        if(lowerIterator != size){
-            substringLower = ' '.repeat(upperIterator -1 ) + substringLower
-        }
+        substringLower = ' '.repeat(upperIterator -1 ) + substringLower
         secondHalf += substringLower
 
         upperIterator += 1
         lowerIterator -= 1
     }
 
-    firstHalf = firstHalf.split('\n')
-    secondHalf = secondHalf.split('\n')
-    firstHalf.pop()
-    secondHalf.pop()
-
-    firstHalf.forEach((line) => console.log(line))
-    secondHalf.forEach((line) => console.log(line))
+    let finalString = (firstHalf + secondHalf).slice(0, firstHalf.length + secondHalf.length - 1);
 
 
-  return 2;
+  return finalString;
 }
 
 
