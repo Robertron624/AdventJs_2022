@@ -17,15 +17,17 @@ const gifts = getGiftsToRefill(a1, a2, a3); // ['muñeca', 'pc']
 
 // Como ves, los almacenes pueden tener el mismo regalo repetido varias veces. Pero, por más existencias que haya en un almacén, si no tenemos en los otros dos, debemos reponerlo para tener mejor distribución.
 
-function getGiftsToRefill(a1, a2, a3) {
+function getGiftsToRefill(...arrays) {
+  let items = {}
 
-    let giftsToRefill = [];
+  for (let [n, a] of arrays.entries())
+      for (let x of a) {
+          items[x] = (items[x] ? items[x]: 0) | (1 << n);
+      }
 
-    let newArr = [...a1, ...a2, ...a3];
-    
-
-
-  return new Set(newArr);
+  return Object.keys(items).filter(x => 
+      Number.isInteger(Math.log2(items[x])))
 }
 
 console.log(getGiftsToRefill(a1, a2, a3));
+
