@@ -1,31 +1,14 @@
 function checkJump(heights) {
+    const left = heights.splice(0, heights.indexOf(Math.max(...heights)))
+    const conditionLeft = left
+      .slice(1)
+      .every((l, i) => l >= left[i])
+    const conditionRight = heights
+      .slice(1)
+      .every((h, i) => h <= heights[i])
+  
+    return conditionLeft && conditionRight && !!left.length && heights.length > 1
 
-    let heightestPoint = Math.max(...heights);
-
-    let goingDown = false;
-
-
-    for(let [index, height] of heights.entries()) {
-        if(height == heightestPoint) goingDown = true;
-
-        if(goingDown && heights[index + 1] > height) {
-            return false;
-        }
-
-        if(!goingDown && heights[index + 1] < height) {
-            return false;
-        }
-
-        if(height == heightestPoint && heights[index + 1] == undefined){
-            return false;
-        }
-    }
-
-    if(!goingDown){
-        return false;
-    }
-
-    return true;
 }
 
 // Crea un programa que compruebe que el trineo de Santa Claus hace una parabola al saltar entre ciudades. Recibes un array de números que representan la altura en la que se encuentra el trineo en cada momento.
