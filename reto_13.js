@@ -1,16 +1,12 @@
 function getFilesToBackup(lastBackup, changes) {
 
-    let myObject = {};
+    let filteredArray = changes.filter((change) => change[1] > lastBackup)
 
-    let result = [];
+    let idsOnly = filteredArray.map((change) => change[0])
+    let sortedIds = idsOnly.sort((a, b) => a - b)
+    let flatenedArray = [...new Set(sortedIds)];
 
-    for(let change of changes){
-      if(change[1] != lastBackup && result.indexOf(change[0]) == -1){
-        result.push(change[0]);
-      }
-    }
-
-    return result.sort((a, b) => a -b);
+    return flatenedArray;
   
 }
 
