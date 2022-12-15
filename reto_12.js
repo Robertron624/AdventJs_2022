@@ -12,7 +12,9 @@ function selectSleigh(distance, sleighs) {
         }
     }
 
-    return better.name;
+    let next = sleighs[sleighs.indexOf(better) + 1];
+
+    return next.name;
 }
 
 const distance = 30;
