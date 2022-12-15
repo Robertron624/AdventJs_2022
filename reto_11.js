@@ -44,3 +44,27 @@ console.log(getCompleted('03:30:30', '05:50:50'))  // '3/5
 // Pero Papa Noél no se entera rápidamente si falta o mucho para que termine, así que nos ha pedido que hagamos un programa que nos indique la porción de la tarea que ya se ha completado.
 
 // Por ejemplo, si la tarea dura 03:00:00 y llevan trabajando 01:00:00 entonces ya han completado 1/3 de la tarea. En código:
+
+
+// La funcion abajo de esta linea es mejor -> Mas rapida
+
+// function getCompleted(part, total) {
+//     const convertToSeconds = (time) => {
+//         let a = time.split(":");
+//         const seconds = +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
+
+//         return seconds;
+//     };
+
+//     function getGcd(a, b) {
+//         return b == 0 ? a : getGcd(b, a % b);
+//     }
+
+//     let partSeconds = convertToSeconds(part);
+//     let totalSeconds = convertToSeconds(total);
+//     let gcd = getGcd(partSeconds, totalSeconds);
+
+//     let result = partSeconds / gcd + "/" + totalSeconds / gcd;
+
+//     return result;
+// }
