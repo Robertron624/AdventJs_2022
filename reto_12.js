@@ -1,30 +1,6 @@
 function selectSleigh(distance, sleighs) {
-    let better = {
-      name: "",
-      consumption: 10000,
-    };
-
-    for (let sleigh of sleighs) {
-        let totalConsumption = sleigh.consumption * distance;
-
-        console.log("Current -> ", sleigh)
-        console.log("totalConsumption -> ", totalConsumption)
-
-        if ((totalConsumption < better.consumption * distance) && totalConsumption <= 20) {
-          console.log("Dentro del if")
-            better = sleigh;
-        }
-    }
-
-    let next = sleighs[sleighs.indexOf(better) + 1];
-
-    if(next.consumption * distance <= 20) {
-      better = next;
-    }
-
-    console.log(better)
-
-    return better.name == "" ? null : better.name;
+    let sleigh = sleighs.filter((s) => 20 / s.consumption >= distance).at(-1);
+    return sleigh ? sleigh.name : null;
 }
 
 const distance = 30;
