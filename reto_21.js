@@ -1,8 +1,38 @@
 function printTable(gifts) {
-    const maxItemLenght = "Gift";
-    const maxItemQuantity = "Quantity"
+    let maxItemGift = "Gift";
+    let maxItemQuantity = "Quantity";
 
-    return [maxItemLenght, maxItemQuantity];
+    gifts.map((gift) => {
+        if(gift.name.length > maxItemGift.length){
+            maxItemGift = gift.name;
+        }
+        if(String(gift.quantity).length > maxItemQuantity.length){
+            maxItemQuantity = String(gift.quantity)
+        }    
+    })
+
+    let topBorder = "+".repeat((maxItemGift.length + maxItemQuantity.length) + 7)
+    let bottomBorder = "*".repeat((maxItemGift.length + maxItemQuantity.length) + 7)
+    let titles = `| Gift${" ".repeat(maxItemGift.length - 4)} | Quantity${" ".repeat(maxItemQuantity.length - 8)} |`;
+    let separator = `| ${"-".repeat(maxItemGift.length)} | ${"-".repeat(maxItemQuantity.length)} |`
+    let heading = `${topBorder}\n${titles}\n${separator}`
+
+    let body = "";
+
+    for(let i = 0; i < gifts.length; i++) {
+        let name = gifts[i].name;
+        let quantity = gifts[i].quantity;
+        let line = `| ${name}${" ".repeat(maxItemGift.length - name.length)} | ${quantity}${" ".repeat(maxItemQuantity.length - String(quantity).length)} |`
+
+        if(i + 1 != gifts.length){
+            line += "\n";
+        }
+        body += line;
+    }
+
+    let all  = `${heading}\n${body}\n${bottomBorder}`;
+
+    return all;
 }
 
 //   Hay muchas cartas de niños pidiendo regalos y es muy difícil que podamos hacer inventario de todos ellos. Por eso, hemos decidido crear un programa que nos dibuje una tabla con los regalos que nos piden y sus cantidades.
@@ -24,11 +54,10 @@ console.log(
 //   | Book | 3        |
 //   *******************
 //   Otro ejemplo donde se puede ver que la tabla siempre usa sólo el espacio justo dependiendo de la longitud de los nombres de los regalos y de las cantidades.
-
-// printTable([
-//     { name: "PlayStation 5", quantity: 9234782374892 },
-//     { name: "Book Learn Web Dev", quantity: 23531 },
-// ]);
+console.log(printTable([
+    { name: "PlayStation 5", quantity: 9234782374892 },
+    { name: "Book Learn Web Dev", quantity: 23531 },
+]));
 //   ++++++++++++++++++++++++++++++++++++++
 //   | Gift               | Quantity      |
 //   | ------------------ | ------------- |
