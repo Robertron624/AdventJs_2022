@@ -1,21 +1,19 @@
 function checkStepNumbers(systemNames, stepNumbers) {
-
     let myObj = {};
 
-    for(let index = 0; index < systemNames.length; index++){
+    for (let index = 0; index < systemNames.length; index++) {
         let systemName = systemNames[index];
 
-        // if systemName is not inside the myObj object then added with 
+        // if systemName is not inside the myObj object then added with
         // value an array with corresponding stepnumber inside
-        if(!(Object.keys(myObj).includes(systemName))){
+        if (!Object.keys(myObj).includes(systemName)) {
             myObj[systemName] = [stepNumbers[index]];
-        }
-        else{
-            // Add the step number i to the system name array but before check if the current number 
+        } else {
+            // Add the step number i to the system name array but before check if the current number
             // is lower than the previous
-            if(stepNumbers[index] <  myObj[systemName]){
+            if (stepNumbers[index] < myObj[systemName]) {
                 return false;
-            } 
+            }
             myObj[systemName].push(stepNumbers[index]);
         }
     }
@@ -31,10 +29,10 @@ function checkStepNumbers(systemNames, stepNumbers) {
 
 // Por ejemplo:
 
-const systemNames = ["tree_1", "tree_2", "house", "tree_1", "tree_2", "house"]
-const stepNumbers = [1, 33, 10, 2, 44, 20]
+const systemNames = ["tree_1", "tree_2", "house", "tree_1", "tree_2", "house"];
+const stepNumbers = [1, 33, 10, 2, 44, 20];
 
-console.log(checkStepNumbers(systemNames, stepNumbers)) // => true
+console.log(checkStepNumbers(systemNames, stepNumbers)); // => true
 
 // tree_1 tiene los pasos: [1, 2]
 // tree_2 tiene los pasos: [33, 44]
@@ -42,7 +40,7 @@ console.log(checkStepNumbers(systemNames, stepNumbers)) // => true
 
 // true: Los pasos de cada sistema están en orden estrictamente creciente
 
-console.log(checkStepNumbers(["tree_1", "tree_1", "house"], [2, 1, 10])) // => false
+console.log(checkStepNumbers(["tree_1", "tree_1", "house"], [2, 1, 10])); // => false
 
 // tree_1 tiene los pasos: [2, 1]
 // house tiene los pasos: [10]
@@ -53,3 +51,11 @@ console.log(checkStepNumbers(["tree_1", "tree_1", "house"], [2, 1, 10])) // => f
 
 // La posición del nombre del sistema en systemNames y el número de paso en stepNumbers corresponden al mismo sistema.
 // Los pasos en stepNumbers pueden repetirse para diferentes sistemas.
+
+// Shorter function
+
+// return systemNames.every(
+//     (e, i) =>
+//         stepNumbers[i] <=
+//         stepNumbers[i + systemNames.slice(i + 1).indexOf(e) + 1]
+// );
